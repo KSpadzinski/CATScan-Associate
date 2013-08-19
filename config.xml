@@ -2,7 +2,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.toromont.catscanassociate"
-        version   = "1.2.0">
+        version   = "1.2.1">
     <name>Associate</name>
 
     <description>
@@ -23,7 +23,7 @@
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="prerendered-icon" value="true" />
 
-    <gap:plugin name="BarcodeScanner" />
+    <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 
     <icon src="img/icon.png" />
     <gap:splash src="img/splash.png" />
