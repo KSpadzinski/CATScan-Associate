@@ -188,6 +188,7 @@
         var QRID;
         var Status = 1;
         var AssociationMessage = "";
+        var scanner;
 
 	    $(document).ready(function () {
 	        var receivedItems = {};
@@ -203,12 +204,20 @@
                 $("#pnlNotAuthenticated").show();
                 $("#pnlAuthenticated").hide();
             }
+            
+             /* Phonegap BarcodeScanner Plugin */
+			try {
+			scanner = cordova.require("cordova/plugin/BarcodeScanner");
+			}
+			catch(e) {
+			bootstrap_alert.warning("Scanner was not started.  Barcode scanning not available.");
+			}
 
 	        function scanBarcode(scanType) {
                 var url = "";
                 if($("#txtQRCode").val()=='')   {
 
-	            window.plugins.barcodeScanner.scan(function (result) {
+	            scanner.scan(function (result) {
 	                if (result.cancelled == 1) {
 	                    bootstrap_alert.warning("Scan was cancelled");
 	                    return false;
