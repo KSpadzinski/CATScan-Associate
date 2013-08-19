@@ -95,7 +95,7 @@
                      </div>-->
                 </div>
                 </form>
-                <table class="table table-hover" id="tblDynamic" style="display: none;">
+                <table class="table table-hover" id="tblDynamic" style="display: none; font-size: 11px;">
                     <tbody id="tblDynamicItems">
                         <tr>
                             <td colspan='4'>
@@ -156,7 +156,7 @@
                 </div>
                 <div class="row">
                 	<div class="span12">
-                		<span id="lblVersion" style="margin-top: 10px;"></span>
+                		<span id="lblVersion" style="margin-top: 10px;">CATScan Associate Version 1.2.3</span>
                 	</div>
                 </div>
             </div>
@@ -484,7 +484,7 @@
                             var html = "";  
                             var equipType = item.EquipmentTypeName=='Equipment' ? "E" : "A";
                             html += "<tr>";
-                            html += "<td>" + equipType + "-" + item.EquipManufCode + "</td><td>" + item.DisplayModel + "</td><td>" + item.SerialNumber + "</td><td>" + equipType + "</td>";
+                            html += "<td nowrap>" + equipType + "-" + item.EquipManufCode + "</td><td>" + item.DisplayModel + "</td><td>" + item.SerialNumber + "</td><td>" + equipType + "</td>";
                             html += "<td><button id='btnAssociate' class='btn btn-small btn-inverse' equipmanufcode='" + item.EquipManufCode + "' serialnumber='" + item.SerialNumber + "' displaymodel='" + item.DisplayModel + "' style='color: white; font-size: 20px;' type='button'>+</button></td>";
                             $('#tblDynamicItems').append(html);
                         });
@@ -538,7 +538,7 @@
                             var html = "";  
                             var equipType = item.EquipmentTypeName=='Equipment' ? "E" : "A";
                             html += "<tr>";
-                            html += "<td>" + equipType + "-" + item.EquipManufCode + "</td><td>" + item.DisplayModel + "</td><td>" + item.SerialNumber + "</td>";
+                            html += "<td nowrap>" + equipType + "-" + item.EquipManufCode + "</td><td>" + item.DisplayModel + "</td><td>" + item.SerialNumber + "</td>";
                             html += "<td><button id='btnAssociate' class='btn btn-small btn-inverse' equipmanufcode='" + item.EquipManufCode + "' serialnumber='" + item.SerialNumber + "' displaymodel='" + item.DisplayModel + "' style='color: white; font-size: 20px;' type='button'>+</button></td>";
                             $('#tblDynamicItems').append(html);
                         });
@@ -597,14 +597,6 @@
                 Longitude = position.coords.longitude;
             }
             
-            $.ajax({
-		    	async: "false",
-		        type: "GET",
-		        url: "config.xml",
-		        success: function(data) {
-		            $('#lblVersion').text('CATScan Associate Version ' + $(data).find('widget').attr('version'));
-		        }
-		    });
 
             if(!window.cordova) {
                 
