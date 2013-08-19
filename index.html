@@ -156,7 +156,7 @@
                 </div>
                 <div class="row">
                 	<div class="span12">
-                		<span id="lblVersion" style="margin-top: 10px;">CATScan Associate Version 1.2.3</span>
+                		<span id="lblVersion" style="margin-top: 10px;">CATScan Associate Version 1.2.4</span>
                 	</div>
                 </div>
             </div>
@@ -295,10 +295,14 @@
                 capturePhoto();
 	        });
 
-             /* Material Part Number */
-	        $('#btnStatus2, #btnStatus3, #btnStatus4').live('click', function () {
+            /* Get Status */
+	        $(document).on('click', '#btnStatus2, #btnStatus3, #btnStatus4', function () {
+	        	$('#btnStatus2').text('Ready');
+                $('#btnStatus3').text('Shop');
+                $('#btnStatus4').text('Attention');
                 Status = $(this).attr('status');
-	        });
+                $(this).html('<i class="icon-check icon-white"></i>&nbsp;' + $(this).text());
+            });
 
 	        $('#dataConfirmOK').live("click", function () {
                 $("#spinnerContainer").hide();
@@ -624,6 +628,9 @@
                 imageProgressCount = 0;
                 $('#pictureContainer').html('');
                 $('#btnStatus2, #btnStatus3, #btnStatus4').removeClass('active');
+                $('#btnStatus2').text('Ready');
+                $('#btnStatus3').text('Shop');
+                $('#btnStatus4').text('Attention');
                 $('#appTabs a[href="#scan"]').tab('show');
             }
 
