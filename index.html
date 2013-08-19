@@ -2,52 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CATScan Associate</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <style>
-	@media (min-width: 981px) { body { padding-top: 60px; } }
-	
-	@font-face {
-            font-family: 'Open Sans';
-            src: url(assets/fonts/OpenSans-Regular.ttf);
-        }
-       body {
-           font-family: 'Open Sans';
-       }
-
-       .imgStandard {
-            width: 70px;
-            height: 70px;
-	        margin-right: 5px; 
-            margin-top: 10px;
-	        border-top: 5px solid #efefef;
-	        border-left: 5px solid #efefef;
-	        border-right: 5px solid #efefef;
-	        border-bottom: 20px solid #efefef;	
-        }
-
-       .navbar-inverse .navbar-inner {
-        background-color: #cccccc;
-        }
-
-        .nav-tabs > li > a {
-          -webkit-border-radius: 0px 0px 0 0;
-             -moz-border-radius: 0px 0px 0 0;
-                  border-radius: 0px 0px 0 0;
-        }
-
-        input  {
-            -webkit-border-radius: 0 0px 0px 0;
-            -moz-border-radius: 0 0px 0px 0;
-            border-radius: 0 0px 0px 0;
-         }
-	</style>
+    <title>CATScan Check-In</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="Content/app.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -67,6 +29,11 @@
             </div>
         </div>
     </div>
+    
+    <!-- Alert Holder -->
+        <div class="row">
+            <div id="alert_placeholder" class="span12"></div>
+        </div> 
 
     <!-- Login : Shows when user isn't authenticated" -->
     <div class="container" id="pnlNotAuthenticated" style="display: block;" style="display: none;">
@@ -82,7 +49,7 @@
 
     <!-- Application : Available When Authenticated -->
     <div class="container tabbable" id="pnlAuthenticated" style="display: none;">
-
+        
         <!-- Tabs -->
         <ul class="nav nav-tabs" style="margin-top: -10px;" id="appTabs">
             <li class="active"><a href="#scan" data-toggle="tab">Scan</a></li>
@@ -98,14 +65,12 @@
                 <form class="form">
                 <div class="control-group" id="cgMaterialPartNumber" style="background: #f9f9f9;
                     padding: 5px;">
-                    <p>
-                        <strong>Step One:</strong> Scan / Enter QR Code</p>
+                    <p><strong>Scan / Enter QR Code</strong></p>
                     <div class="controls input-append">
                         <input type="text" id="txtQRCode" placeholder="QR Code" style="width: 125px;">
-                        <button id="btnQRCodeScan" class="btn  btn-warning" type="button">
-                            Scan</button>
-                        <button id="btnQRCodeClear" class="btn" type="button">
-                            Clear</button>
+                        <button id="btnQRCodeClear" class="btn" type="button"><i class="icon-remove-sign"></i></button>
+                                <button id="btnQRCodeScan" class="btn btn-inverse" type="button"><i class="icon-qrcode"></i>&nbsp;Scan</button>
+                              
                     </div>
                     <div id="scanResultMessage">
                         &nbsp;</div>
@@ -113,20 +78,17 @@
                 <div class="control-group" id="cgSerialNumber" style="background: #f9f9f9; padding: 5px;
                     margin-top: -5px;">
                     <p>
-                        <strong>Step Two:</strong> Lookup by serial or stock #</p>
+                        <strong>Lookup by serial or stock #</strong></p>
                     <div class="controls input-append">
                         <input type="text" id="txtSerialNumber" placeholder="Serial #" style="width: 125px;">
-                        <button id="btnSerialNumberSearch" class="btn  btn-warning" type="button">
-                            Search</button>
-                        <button id="btnSerialNumberClear" class="btn" type="button">
-                            Clear</button>
+                        <button id="btnSerialNumberClear" class="btn" type="button"><i class="icon-remove-sign"></i></button>
+                        <button id="btnSerialNumberSearch" class="btn  btn-inverse" type="button"><i class="icon-search"></i>&nbsp;Search</button>
+                        
                     </div>
                     <div class="controls input-append">
                         <input type="text" id="txtStockNumber" placeholder="Stock #" style="width: 125px;">
-                        <button id="btnStockNumberSearch" class="btn  btn-warning" type="button">
-                            Search</button>
-                        <button id="btnStockNumberClear" class="btn" type="button">
-                            Clear</button>
+                        <button id="btnStockNumberClear" class="btn" type="button"><i class="icon-remove-sign"></i></button>
+                        <button id="btnStockNumberSearch" class="btn  btn-inverse" type="button"><i class="icon-search"></i>&nbsp;Search</button>
                     </div>
                     <!-- <div class="controls"> 
                      	
@@ -134,24 +96,9 @@
                 </div>
                 </form>
                 <table class="table table-hover" id="tblDynamic" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th>
-                                Manuf
-                            </th>
-                            <th>
-                                Serial
-                            </th>
-                            <th>
-                                Type
-                            </th>
-                            <th>
-                            </th>
-                        </tr>
-                    </thead>
                     <tbody id="tblDynamicItems">
                         <tr>
-                            <td colspan='3'>
+                            <td colspan='4'>
                             </td>
                         </tr>
                     </tbody>
@@ -202,16 +149,19 @@
 
             <!-- Settings Tab -->
             <div class="row tab-pane" id="settings">
-                <div class="span12">
-                    <button href="#" class="btn btn-inverse" id="btnSignOut" type="button">Sign Out</button>
+                <div class="row">
+                	<div class="span12" style="margin-top: 5px; margin-bottom: 5px;">
+                    	<button href="#" class="btn btn-inverse" id="btnSignOut" type="button">Sign Out</button>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="span12">
+                		<span id="lblVersion" style="margin-top: 10px;"></span>
+                	</div>
                 </div>
             </div>
         </div>
 
-        <!-- Alert Holder -->
-        <div class="row">
-            <div id="alert_placeholder" class="span12"></div>
-        </div> 
     </div>  
 
     <!-- /container -->
@@ -220,14 +170,15 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="phonegap.js"></script>
+    <script src="barcodescanner.js"></script>       
     <script src="js/jQuery.plugin.jStorage.js"></script>
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script src="js/parseUrl.js"></script>
     <script src="js/core.js"></script>
     <script src="js/login.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/camera.js"></script>
-    <script src="js/barcodescanner.js"></script>
+
     <script>
         var Latitude;
         var Longitude; 
@@ -420,9 +371,17 @@
 	      
 
             $('#btnAssociate').live("click", function () {
+            	if($('#txtQRCode').val()=='') {
+                    bootstrap_alert.warning("Please scan or enter a QR Code value first");
+                    $('#txtSerialNumber').val('');
+                    return;
+                }
+                navigator.geolocation.getCurrentPosition(handle_geolocation_query, handle_errors, {enableHighAccuracy: true});
+                
 	            EquipManufCode = $(this).attr('equipmanufcode');
                 SerialNumber = $(this).attr('serialnumber');
-                $('#lblAssociationMessage').html("You are going to associated QR Code: <strong>" + QRID + "</strong> with <strong>" + EquipManufCode + " - " + SerialNumber + "</strong> and add the location of (Lat: " + Math.round(Latitude*10000)/10000 + " - Lon: " + Math.round(Longitude*10000)/10000 + ")");
+                DisplayModel = $(this).attr('displaymodel');
+                $('#lblAssociationMessage').html("You are going to associated QR Code: <strong>" + QRID + "</strong> with <strong>" + DisplayModel + " - " + EquipManufCode + " - " + SerialNumber + "</strong> and add the location of (Lat: " + Math.round(Latitude*10000)/10000 + " - Lon: " + Math.round(Longitude*10000)/10000 + ")");
                 $('#pnlAssociationMessage').show();
                 $('#appTabs a[href="#associate"]').tab('show'); // Select tab by name
 	        });
@@ -486,11 +445,7 @@
             });
 
             $('#btnSerialNumberSearch').click(function () {
-                if($('#txtQRCode').val()=='') {
-                    bootstrap_alert.warning("Please scan or enter a QR Code value first");
-                    $('#txtSerialNumber').val('');
-                    return;
-                }
+                
                 $('#txtStockNumber').val('');
                 var serialNumber =  $('#txtSerialNumber').val();
                 
@@ -520,8 +475,8 @@
                             var html = "";  
                             var equipType = item.EquipmentTypeName=='Equipment' ? "E" : "A";
                             html += "<tr>";
-                            html += "<td>" + item.EquipManufCode + "</td><td>" + item.SerialNumber + "</td><td>" + equipType + "</td>";
-                            html += "<td><button id='btnAssociate' class='btn btn-small btn-inverse' equipmanufcode='" + item.EquipManufCode + "' serialnumber='" + item.SerialNumber + "' style='color: white; font-size: 20px;' type='button'>+</button></td>";
+                            html += "<td>" + equipType + "-" + item.EquipManufCode + "</td><td>" + item.DisplayModel + "</td><td>" + item.SerialNumber + "</td><td>" + equipType + "</td>";
+                            html += "<td><button id='btnAssociate' class='btn btn-small btn-inverse' equipmanufcode='" + item.EquipManufCode + "' serialnumber='" + item.SerialNumber + "' displaymodel='" + item.DisplayModel + "' style='color: white; font-size: 20px;' type='button'>+</button></td>";
                             $('#tblDynamicItems').append(html);
                         });
                         $('#tblDynamic').show();
@@ -574,8 +529,8 @@
                             var html = "";  
                             var equipType = item.EquipmentTypeName=='Equipment' ? "E" : "A";
                             html += "<tr>";
-                            html += "<td>" + item.EquipManufCode + "</td><td>" + item.SerialNumber + "</td><td>" + equipType + "</td>";
-                            html += "<td><button id='btnAssociate' class='btn btn-small btn-inverse' equipmanufcode='" + item.EquipManufCode + "' serialnumber='" + item.SerialNumber + "' style='color: white; font-size: 20px;' type='button'>+</button></td>";
+                            html += "<td>" + equipType + "-" + item.EquipManufCode + "</td><td>" + item.DisplayModel + "</td><td>" + item.SerialNumber + "</td>";
+                            html += "<td><button id='btnAssociate' class='btn btn-small btn-inverse' equipmanufcode='" + item.EquipManufCode + "' serialnumber='" + item.SerialNumber + "' displaymodel='" + item.DisplayModel + "' style='color: white; font-size: 20px;' type='button'>+</button></td>";
                             $('#tblDynamicItems').append(html);
                         });
                         $('#tblDynamic').show();
@@ -632,6 +587,15 @@
                 Latitude = position.coords.latitude;
                 Longitude = position.coords.longitude;
             }
+            
+            $.ajax({
+		    	async: "false",
+		        type: "GET",
+		        url: "config.xml",
+		        success: function(data) {
+		            $('#lblVersion').text('CATScan Associate Version ' + $(data).find('widget').attr('version'));
+		        }
+		    });
 
             if(!window.cordova) {
                 
